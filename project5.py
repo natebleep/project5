@@ -21,24 +21,28 @@ def json_response():
 
 @app.route('/md5/')
 def md5_response():
-    resp = hashlib.md5({string})
+    word = input('Input: ')
+    resp = hashlib.md5(word)
     return resp
 
 @app.route('/factoral/')
 def factoral_response():
-    resp = math.factoral({int})
+    num = int(input('Input: '))
+    resp = math.factoral(num)
     return resp
 
 '''@app.route('/fibonacci/')
 def fibonacci_response():
+    num = input('Input: ')
     resp = 
 '''
 
 @app.route('/is-prime/')
 def prime_response():
-    if {int} > 1:
-        for i in range(2, {int}):
-            if ({int} % i) == 0:
+    num = int(input('Input: '))
+    if num > 1:
+        for i in range(2, num):
+            if (num % i) == 0:
                 resp = False
                 break
             else:
