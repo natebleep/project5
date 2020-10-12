@@ -35,7 +35,21 @@ def fibonacci_response():
 
 @app.route('/is-prime/<int>')
 def prime_response():
-    resp = 
+    if <int> > 1:
+        for i in range(2, <int>):
+            if (<int> % i) == 0:
+                resp = False
+                break
+            else:
+                resp = True
+       
+# if input number is less than
+# or equal to 1, it is not prime
+    else:
+        resp = False
+    
+    return resp
+         
 
 @app.route('/slack-alert/<string>')
 def slack_alert_response():
