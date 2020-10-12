@@ -19,22 +19,22 @@ def json_response():
     return resp
 '''
 
-@app.route('/md5/<string>')
+@app.route('/md5/')
 def md5_response():
     resp = hashlib.md5({string})
     return resp
 
-@app.route('/factoral/<int>')
+@app.route('/factoral/')
 def factoral_response():
     resp = math.factoral({int})
     return resp
 
-'''@app.route('/fibonacci/<int>')
+'''@app.route('/fibonacci/')
 def fibonacci_response():
     resp = 
 '''
 
-@app.route('/is-prime/<int>')
+@app.route('/is-prime/')
 def prime_response():
     if {int} > 1:
         for i in range(2, {int}):
@@ -49,7 +49,7 @@ def prime_response():
     return resp
          
 
-'''@app.route('/slack-alert/<string>')
+'''@app.route('/slack-alert/')
 def slack_alert_response():
     resp =
 '''
