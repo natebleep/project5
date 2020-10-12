@@ -23,18 +23,18 @@ def json_response():
 def md5_response():
     word = input('Input: ')
     resp = hashlib.md5(word)
-    return resp
+    return "Output: {resp}"
 
 @app.route('/factoral/')
 def factoral_response():
     num = int(input('Input: '))
     resp = math.factoral(num)
-    return resp
+    return "Output: {resp}"
 
 '''@app.route('/fibonacci/')
 def fibonacci_response():
     num = input('Input: ')
-    resp = 
+    return "Output: {resp}"
 '''
 
 @app.route('/is-prime/')
@@ -50,7 +50,7 @@ def prime_response():
     else:
         resp = False
     
-    return resp
+    return "{num} is Prime: {resp}"
          
 
 '''@app.route('/slack-alert/')
