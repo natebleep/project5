@@ -21,6 +21,7 @@ def json_response():
 @app.route('/md5/<string>')
 def md5_response():
     resp = hashlib.md5(<string>)
+    return resp
 
 @app.route('/factoral/<int>')
 def factoral_response():
