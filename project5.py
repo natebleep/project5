@@ -21,23 +21,24 @@ def json_response():
 
 @app.route('/md5/<string>')
 def md5_response():
-    resp = hashlib.md5(<string>)
+    resp = hashlib.md5({string})
     return resp
 
 @app.route('/factoral/<int>')
 def factoral_response():
-    resp = math.factoral(<int>)
+    resp = math.factoral({int})
     return resp
 
-@app.route('/fibonacci/<int>')
+'''@app.route('/fibonacci/<int>')
 def fibonacci_response():
     resp = 
+'''
 
 @app.route('/is-prime/<int>')
 def prime_response():
-    if <int> > 1:
-        for i in range(2, <int>):
-            if (<int> % i) == 0:
+    if {int} > 1:
+        for i in range(2, {int}):
+            if ({int} % i) == 0:
                 resp = False
                 break
             else:
@@ -48,19 +49,11 @@ def prime_response():
     return resp
          
 
-@app.route('/slack-alert/<string>')
+'''@app.route('/slack-alert/<string>')
 def slack_alert_response():
     resp =
-
-# show a random cat gif
-''' @app.route('/cat')
-def random_cat():
-    gif = random.random(0, 11)
-    image_path = f"https://storage.googleapis.com/tcmg-gifs/{gif}.gif"
-    return f"<html><img src='{image_path}' /></html'>"
 '''
 
 # Run  this flask server if file is called directly
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
-
