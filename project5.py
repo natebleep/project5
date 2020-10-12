@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, escape, request, Response
 import random
 import hashlib
+import math
 
 # instansiate the Flask object
 app = Flask(__name__)
@@ -25,7 +26,8 @@ def md5_response():
 
 @app.route('/factoral/<int>')
 def factoral_response():
-    resp = 
+    resp = math.factoral(<int>)
+    return resp
 
 @app.route('/fibonacci/<int>')
 def fibonacci_response():
