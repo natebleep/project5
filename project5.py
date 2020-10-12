@@ -42,9 +42,6 @@ def prime_response():
                 break
             else:
                 resp = True
-       
-# if input number is less than
-# or equal to 1, it is not prime
     else:
         resp = False
     
