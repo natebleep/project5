@@ -62,10 +62,12 @@ def isprime_response(resp = 'Input'):
             return f'{num} is not a prime number'
          
 
-'''@app.route('/slack-alert/')
-def slack_alert_response():
-    resp =
-'''
+@app.route('/slack/<msg>')
+def slack_post(msg):
+    web_hook_url = 'https://hooks.slack.com/services/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'
+    slck_msg = {'text': msg}
+    requests.post(web_hook_url,data=json.dumps(slck_msg))
+    return 'Done'
 
 # Run  this flask server if file is called directly
 if __name__ == "__main__":
