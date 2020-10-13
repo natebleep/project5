@@ -20,10 +20,10 @@ def json_response():
 '''
 
 @app.route('/md5/')
-def md5_response():
-    word = input('Input: ')
-    resp = hashlib.md5(word)
-    return "Output: {resp}"
+def md5_response( resp = 'Input'):
+    mystring = str(input('Enter a string to hash: '))
+    resp = hashlib.md5(mystring.encode())
+    return (resp.hexdigest())
 
 @app.route('/factorial/')
 def factorial_response(resp = 'result'):
