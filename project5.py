@@ -38,19 +38,17 @@ def fibonacci_response():
 '''
 
 @app.route('/is-prime/')
-def prime_response():
-    num = int(input('Input: '))
-    if num > 1:
-        for i in range(2, num):
-            if (num % i) == 0:
-                resp = False
-                break
+def isprime_response(resp = 'Input'):
+        num = int(input('Input: '))
+        if num > 1:
+            for i in range(2, num):
+                if (num % i) == 0:
+                    return f'{num} is not a prime number'
+                    break
             else:
-                resp = True
-    else:
-        resp = False
-    
-    return "{num} is Prime: {resp}"
+                return f'{num} is a prime number'
+        else:
+            return f'{num} is not a prime number'
          
 
 '''@app.route('/slack-alert/')
