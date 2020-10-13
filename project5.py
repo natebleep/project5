@@ -25,11 +25,11 @@ def md5_response():
     resp = hashlib.md5(word)
     return "Output: {resp}"
 
-@app.route('/factoral/')
-def factoral_response():
-    num = int(input('Input: '))
-    resp = math.factoral(num)
-    return "Output: {resp}"
+@app.route('/factorial/')
+def factorial_response(resp = 'result'):
+    num = int(input('Input a number to compute the factorial: '))
+    resp = math.factorial(num)
+    return f'Output: {resp}'
 
 '''@app.route('/fibonacci/')
 def fibonacci_response():
