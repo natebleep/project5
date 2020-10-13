@@ -31,11 +31,22 @@ def factorial_response(resp = 'result'):
     resp = math.factorial(num)
     return f'Output: {resp}'
 
-'''@app.route('/fibonacci/')
-def fibonacci_response():
+@app.route('/fibonacci/')
+def fibonacci_response(resp = 'result'):
     num = input('Input: ')
-    return "Output: {resp}"
-'''
+    fib_list = []
+    
+    fib1 = 0
+    fib2 = 1
+    fib3 = 1
+
+    while fib1 <= num:
+        fib_list.append(fib1)
+        fib1 = fib2
+        fib2 = fib3
+        fib3 = fib1 + fib2
+        return f'Output: {fib_list}'
+
 
 @app.route('/is-prime/')
 def isprime_response(resp = 'Input'):
