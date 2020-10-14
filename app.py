@@ -12,14 +12,6 @@ app = Flask(__name__)
 def hello():
     return "Hello, Welcome to group project #5."
 
-''' example
-@app.route('/md5/<string>')
-def json_response():
-    resp = Response('{ "foo": "bar", "baz": "bat" }')
-    resp.headers['Content-Type'] = 'application/json'
-    return resp
-'''
-
 @app.route('/md5/<string>')
 def md5_response(string):
     hash1 = md5(string.encode())
@@ -84,10 +76,13 @@ def isprime_response(num):
 
 @app.route('/slack/<msg>')
 def slack_post(msg):
-    web_hook_url = 'https://hooks.slack.com/services/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'
+    web_hook_url = 'https://hooks.slack.com/services/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'
     slck_msg = {'text': msg}
     requests.post(web_hook_url,data=json.dumps(slck_msg))
-    return 'Done'
+    return jsonify(
+        message = msg,
+        Success = True
+    )
 
 # Run  this flask server if file is called directly
 if __name__ == "__main__":
