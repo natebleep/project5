@@ -43,10 +43,10 @@ def fibonacci_response(n):
     elif n == 1:
         return b
     else:       
-        while c < n:                       
+        while c <= n:                       
             c = a + b            
             a = b
-            if c < n:
+            if c <= n:
                 b = c
                 fib.append(c)
             else:
