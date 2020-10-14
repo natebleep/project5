@@ -80,8 +80,8 @@ def slack_post(msg):
     slck_msg = {'text': msg}
     requests.post(web_hook_url,data=json.dumps(slck_msg))
     return jsonify(
-        message = msg,
-        Success = True
+        input = msg,
+        output = True
     )
 
 # Run  this flask server if file is called directly
