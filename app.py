@@ -18,7 +18,7 @@ def md5_response(string):
     hash2 = hash1.hexdigest()
     return jsonify(
         input = string,
-        hash = hash2
+        output = hash2
     )
 
 @app.route('/factorial/<int:num>')
@@ -29,7 +29,7 @@ def factorial_response(num):
         fac = factorial(int(num))
     return jsonify(
         input = num,
-        factorial = fac
+        output = fac
     )
 
 @app.route('/fibonacci/<int:n>')
@@ -53,7 +53,7 @@ def fibonacci_response(n):
                 continue
         return jsonify(
             input = n,
-            fibonacci = fib
+            output = fib
         )
 
 
@@ -70,7 +70,7 @@ def isprime_response(num):
             isprime = False
         return jsonify(
             input = num,
-            isprime = isprime
+            output = isprime
         )
          
 
