@@ -74,7 +74,7 @@ def isprime_response(num):
         )
          
 
-@app.route('/slack/<msg>')
+@app.route('/slack-alert/<msg>')
 def slack_post(msg):
     web_hook_url = 'https://hooks.slack.com/services/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'
     slck_msg = {'text': msg}
