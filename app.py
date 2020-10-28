@@ -3,6 +3,7 @@ from hashlib import md5
 import requests
 import json
 from math import factorial
+import redis
 
 # instansiate the Flask object
 app = Flask(__name__)
