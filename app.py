@@ -87,106 +87,46 @@ def slack_post(msg):
         output = True
     )
 
-
-# @app.route('/keyval/<n>', methods=["GET"])
-# def get_val(n):
-#     if red.exists(n) == 1:
-#         return jsonify(red.get(n))
-#     else:
-#         return (n, "does not exist in the db")
-
-data = {}
-@app.route('/key')
-def get_data():
-    return jsonify(data)
-
 @app.route('/key/<n>', methods=["GET"])
 def get_val(n):
-    if n in data:
-        return jsonify(data.get(n))
+    if n in red:        
+        return red.get(n)
     else:
-        return ("does not exist in the db")
-
+        return ("does not exist in the db")        
+ 
 @app.route('/key', methods=["POST"])
 def add_data():
     post = request.get_json()
     res = list(post.keys())
     n = 0    
     for i in res:
-        if res[n] in data:   
+        if res[n] in red:   
             n += 1            
         else:
-            data.update(request.get_json())
-    return data        
-  
+            red.set(res[n], post[res[n]])
+    return  ''
+
 @app.route('/key', methods=["PUT"])
 def update_data():
-    new = request.get_json()
-    data.update(new) 
-    return '', 200
+    post = request.get_json()
+    res = list(post.keys())
+    n = 0    
+    for i in res:
+        if res[n] in red:
+            red.set(res[n], post[res[n]])   
+            n += 1            
+        else:
+            continue
+    return  ''   
 
 @app.route('/key/<n>', methods=["DELETE"])
 def delete_data(n):
-    if n in data:
-        del data[n]
-        return data
+    if n in red:
+        red.delete(n)
+        return 'poof'
     else:
         return "Key does not exist"          
-    
-# @app.route('/keyval', methods = ['POST', 'PUT'])
-# def kv_upsert():
-#     json = jsonresponse(command = 'CREATE' if request.method == 'POST' else 'UPDATE')
-#     #Check for valid JSON payload
-#     try:
-#         payload = request.get_json()
-#         json.key = payload['key']
-#         json.value = payload['value']
-#         json.command += f" {payload['key']}/{payload['value']}"
-#     except:
-#         json.error = 'Missing or malformed JSON in the client request.'
-#         return jsonify(json), 400
-#     #Attempt to connect to redis
-#     try:
-#         test_value = redis.get(json.key)
-#     except RedisError:
-#         json.error = 'Cannot connect to redis'
-#         return jsonify(json), 400
-#     #POST == create only
-#     if request.method == 'POST' and not test_value == None:
-#         json.error = 'Cannot create a new record: key already exists.'
-#         return jsonify(json), 409
-#     #PUT == update
 
-
-#     #JSON payload returns 5 values
-
-
-#     #Attempt to connect to redis again
-#     try:
-#         test_value = redis.get(key)
-#     except RedisError:
-#         _JSON['error'] = 'Cannot connect to redis.'
-#         return jsonify(_JSON), 400
-#     #Cannot delete or retrieve if value doesn't exist
-#     if test_value == None:
-#         _JSON['error'] = 'Key does not exist.'
-#         return jsonify(_JSON), 404
-#     else:
-#         #Use value from test and decode the byte string to unicode
-#         _JSON['value'] = test_value.decode('unicode-escape')
-#     #GET == retrieve
-#     if request.method == 'GET':
-#         _JSON['result'] = True
-#         return jsonify(_JSON), 200
-#     #DELETE == delete
-#     elif request.method == 'DELETE':
-#         ret = redis.delete(key)
-#         if ret == 1:
-#             _JSON['result'] = True
-#             return jsonify(_JSON)
-#         else:
-#             _JSON['error'] = f'Not able to delete key (expected return value 1; client returned {ret})'
-#             return jsonify(_JSON), 400
 
 # Run  this flask server if file is called directly
 if __name__ == "__main__":
