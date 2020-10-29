@@ -90,7 +90,11 @@ def slack_post(msg):
 @app.route('/key/<n>', methods=["GET"])
 def get_val(n):
     if n in red:        
-        return red.get(n)
+        return jsonify(key=n,
+            value=red.get(n),
+            command=('READ',n),
+            result=True,
+            error='')
     else:
         return ("does not exist in the db")        
  
