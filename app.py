@@ -104,6 +104,7 @@ def add_data():
             n += 1            
         else:
             red.set(res[n], post[res[n]])
+            n += 1
     return  ''
 
 @app.route('/key', methods=["PUT"])
