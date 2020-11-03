@@ -44,7 +44,7 @@ def fibonacci_response(n):
     if n <= 0:
         print("Incorrect input")
     elif n == 1:
-        return b
+        return jsonify(input=n, output=[0,1,1])
     else:       
         while c <= n:                       
             c = a + b            
@@ -105,48 +105,51 @@ def get_val(n):
  
 @app.route('/keyval', methods=["POST"])
 def add_data():
-    post = request.get_json()
-    res = list(post.keys())
-    values = list(post.values())
+    json = request.get_json()
+    values = list(json.values())
+    key = values[0]
+    val = values[1]
     n = 0
-    x = None
-    status = 200    
-    for i in res:
-        if res[n] in red:   
-            n += 1
-            x = True
-            status = 409             
-        else:
-            red.set(res[n], post[res[n]])
-            n += 1
-            status = 200
-    return jsonify(kv_key=res,
-        kv_value=values,
-        command=('CREATE '+str(res)),
-        result=True,
+    x = ''
+    status = 200
+    result = True    
+    if key in red:   
+        n += 1
+        x = True
+        status = 409
+        result = False             
+    else:
+        red.set(key, val)
+        n += 1
+        status = 200        
+    return jsonify(kv_key=key,
+        kv_value=val,
+        command=('CREATE '+key),
+        result=result,
         error=x), status
 
 @app.route('/keyval', methods=["PUT"])
 def update_data():
-    post = request.get_json()
-    res = list(post.keys())
-    values = list(post.values())
+    json = request.get_json()
+    values = list(json.values())
+    key = values[0]
+    val = values[1]
     n = 0
     x = None
-    status = 200    
-    for i in res:
-        if res[n] in red:
-            red.set(res[n], post[res[n]])   
-            n += 1            
-        else:
-            x = True
-            status = 404
-            continue
-    return jsonify(kv_key=res,
-        kv_value=values,
-        command=('UPDATE '+str(res)),
-        result=True,
-        error=x), status   
+    status = 200
+    result = True    
+    if key in red:
+        red.set(key, val)   
+        n += 1            
+    else:
+        x = True
+        status = 404
+        result = False        
+    return jsonify(kv_key=key,
+        kv_value=val,
+        command=('UPDATE '+key),
+        result=result,
+        error=x), status  
 
 @app.route('/keyval/<n>', methods=["DELETE"])
 def delete_data(n):
