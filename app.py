@@ -91,17 +91,17 @@ def slack_post(msg):
 def get_val(n):
     value = str(red.get(n))
     if n in red:                
-        return jsonify(key=n,
-            value=value[2:],
+        return jsonify(kv_key=n,
+            kv_value=value[2:-1],
             command=('READ '+n),
             result=True,
-            error='')
+            error=None), 200
     else:
-        return jsonify(key=n,
-            value=value[2:],
+        return jsonify(kv_key=n,
+            kv_value=None,
             command=('READ '+n),
             result=False,
-            error='Key does not exist')        
+            error=True), 400        
  
 @app.route('/keyval', methods=["POST"])
 def add_data():
@@ -109,19 +109,23 @@ def add_data():
     res = list(post.keys())
     values = list(post.values())
     n = 0
-    x = None    
+    x = None
+    status = 200    
     for i in res:
         if res[n] in red:   
             n += 1
-            x = '1 or more keys already exists'            
+            x = True
+            status = 409             
         else:
             red.set(res[n], post[res[n]])
             n += 1
-    return jsonify(key=res,
-        value=values,
+            status = 200
+    return jsonify(kv_key=res,
+        kv_value=values,
         command=('CREATE '+str(res)),
         result=True,
-        error=x)
+        error=x,
+        input=post), status
 
 @app.route('/keyval', methods=["PUT"])
 def update_data():
@@ -129,36 +133,38 @@ def update_data():
     res = list(post.keys())
     values = list(post.values())
     n = 0
-    x = None    
+    x = None
+    status = 200    
     for i in res:
         if res[n] in red:
             red.set(res[n], post[res[n]])   
             n += 1            
         else:
-            x = '1 or more keys doesn\'t exists'
+            x = True
+            status = 404
             continue
-    return jsonify(key=res,
-        value=values,
+    return jsonify(kv_key=res,
+        kv_value=values,
         command=('UPDATE '+str(res)),
         result=True,
-        error=x)   
+        error=x), status   
 
 @app.route('/keyval/<n>', methods=["DELETE"])
 def delete_data(n):
     value = str(red.get(n))
     if n in red:        
         red.delete(n)
-        return jsonify(key=n,
-            value=value[2:],
+        return jsonify(kv_key=n,
+            kv_value=value[2:-1],
             command=('DELETE '+n),
             result=True,
             error='')
     else:
-        return jsonify(key=n,
-            value=None,
+        return jsonify(kv_key=n,
+            kv_value=None,
             command=('DELETE '+n),
             result=False,
-            error='Key does not exist')          
+            error=True), 404          
 
 
 # Run  this flask server if file is called directly
