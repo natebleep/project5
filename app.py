@@ -124,8 +124,7 @@ def add_data():
         kv_value=values,
         command=('CREATE '+str(res)),
         result=True,
-        error=x,
-        input=post), status
+        error=x), status
 
 @app.route('/keyval', methods=["PUT"])
 def update_data():
