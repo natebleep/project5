@@ -1,7 +1,7 @@
 version: '3.8'
 services: 
   web: 
-    image: nate1504/tcmg412
+    image: nate1504/tcmg412api
     ports: 
       - '5000:5000'
     networks: 
