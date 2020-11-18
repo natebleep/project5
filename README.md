@@ -12,3 +12,5 @@ Start redis server:
   
 start flask server:
   docker run --rm --network redisnet -p 80:5000 project6
+
+
